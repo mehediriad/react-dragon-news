@@ -41,7 +41,7 @@ const NewsCard = ({news}) => {
                     
                         {
                             details.length>190 ? 
-                            <p>{details.slice(0,190)}<Link to={`/news/${news._id}`} className='btn btn-link btn-secondary'>Read More...</Link></p> :
+                            <p>{details.slice(0,190)}<Link to={`news/${news._id}`} className='btn btn-link btn-secondary'>Read More...</Link></p> :
                             <p>{details}</p>
                         }
                     

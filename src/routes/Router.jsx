@@ -3,6 +3,8 @@ import Root from "../layouts/Root";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
+import PrivateRoute from "./PrivateRoute";
+import News from "../pages/News/News";
 
 const router = createBrowserRouter([
     {
@@ -12,7 +14,7 @@ const router = createBrowserRouter([
         {
           path:'/',
           element:<Home/>,
-          loader: ()=> fetch('news.json')
+          loader: ()=> fetch('/news.json')
         },
         {
           path:'/login',
@@ -22,6 +24,11 @@ const router = createBrowserRouter([
           path:'/register',
           element:<Register/>
         },
+        {
+          path:'/news/:id',
+          element:<PrivateRoute><News/></PrivateRoute>,
+          loader: ()=> fetch('/news.json')
+        }
       ]
     },
   ]);

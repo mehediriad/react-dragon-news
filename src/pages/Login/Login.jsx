@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import { useContext } from "react";
 import { AuthContext } from "../../provider/AuthProvider";
@@ -7,6 +7,7 @@ import { AuthContext } from "../../provider/AuthProvider";
 const Login = () => {
     const {signInUser} = useContext(AuthContext)
     const nevigate = useNavigate()
+    const location = useLocation()
 
     const handleLoginSubmit = (e) =>{
         e.preventDefault()
@@ -18,8 +19,9 @@ const Login = () => {
         .then((userCredential) => {
              
             const user = userCredential.user;
-            nevigate("/")
-            console.log(user);
+
+            location.state ? nevigate(location.state) : nevigate("/");
+            
             
           })
           .catch((error) => {
