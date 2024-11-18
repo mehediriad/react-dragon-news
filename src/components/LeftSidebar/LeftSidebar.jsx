@@ -45,7 +45,7 @@ const LeftSidebar = () => {
                     className="space-y-4"
                     >
                         <div >
-                            <img className="w-full" src={aNews.thumbnail_url} alt="" />
+                            <img className="w-full" src={aNews.image_url} alt="" />
                         </div>
                         <div>
                             <h2 className="text-lg font-bold">{aNews.title}</h2>
