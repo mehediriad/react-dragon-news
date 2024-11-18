@@ -10,7 +10,7 @@ const Navbar = () => {
          
     </>
     return (
-        <div className="mb-2">
+        <div className="mb-4">
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
                     <div className="dropdown">
