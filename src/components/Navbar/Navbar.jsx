@@ -1,7 +1,19 @@
 import { Link, NavLink } from "react-router-dom";
 import defaultUser from "../../assets/user.png"
+import { useContext } from "react";
+import { AuthContext } from "../../provider/AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
+    const {user,logOut} = useContext(AuthContext)
+
+    const handleLogOut = () =>{
+        logOut()
+        .then(() => {
+            toast.info("You Are LogOut!")
+          }).catch((error) => { });
+    }
 
     const links = <>
         <li><NavLink to="/">Home</NavLink></li>
@@ -42,30 +54,36 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    
-                    <div className="dropdown dropdown-end">
-                        <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                            <div className="w-10 rounded-full">
-                            <img
-                                alt="Tailwind CSS Navbar component"
-                                src={defaultUser} />
-                            </div>
+
+                  {
+                    user ? <div className="dropdown dropdown-end">
+                    <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                        <div className="w-10 rounded-full">
+                        <img
+                            alt="Tailwind CSS Navbar component"
+                            src={defaultUser} />
                         </div>
-                        <ul
-                            tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
-                            <li>
-                            <a className="justify-between">
-                                Profile
-                            </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li><a>Logout</a></li>
-                        </ul>
                     </div>
-                    <Link><button className="btn">Login</button></Link>
+                    <ul
+                        tabIndex={0}
+                        className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
+                        <li>
+                        <a className="justify-between">
+                            Profile
+                        </a>
+                        </li>
+                        <li><a>Settings</a></li>
+                        <li><button onClick={handleLogOut}>logOut</button></li>
+                    </ul>
+                </div> : 
+                <Link to="/login"><button className="btn">Login</button></Link>
+                  }  
+                    
+                
+                    
                 </div>
                 </div>
+                <ToastContainer />
         </div>
     );
 };
